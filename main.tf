@@ -20,10 +20,10 @@ terraform {
 
 module "lambda" {
     source       = "./modules/lambda"
-    #dynamodb_arn = module.dynamodb.dynamodb_arn
-    # depends_on = [
-    # module.dynamodb
-    # ]
+    dynamodb_arn = module.dynamodb.dynamodb_arn
+    depends_on = [
+    module.dynamodb
+    ]
     source_file = [
         "lambda_codes/dynamodb_get.py",
         "lambda_codes/dynamodb_delete.py",
@@ -43,5 +43,6 @@ module "rest_api_gateway" {
     name_stage = "dev"
     api_method = ["GET", "DELETE", "POST", "PUT"]
     aws_lambda_function_invoke_arn = module.lambda.lambda_invoke_arn
-    lambda_name = module.lambda.lambda_name
+    aws_lambda_function_name = module.lambda.lambda_name[*]
+    name_api = "student_api"
 }

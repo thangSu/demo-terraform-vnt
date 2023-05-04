@@ -80,7 +80,7 @@ resource "aws_api_gateway_deployment" "deployment" {
 }
 
 resource "aws_lambda_permission" "apigw_invoke_lambda" {
-  count         = length(var.lambda_name_function)
+  count         = length(var.aws_lambda_function_name)
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = "${var.aws_lambda_function_name[count.index]}"
