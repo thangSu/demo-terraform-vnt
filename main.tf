@@ -37,3 +37,8 @@ module "lambda" {
         "lambda_codes/zip/dynamodb_modify.zip",
     ]
 }
+
+module "rest_api_gateway" {
+    source = "./demo-terraform-vnt/modules.tf/rest_api_gateway"
+    name_stage = "dev"
+}
