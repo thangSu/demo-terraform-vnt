@@ -39,7 +39,7 @@ module "lambda" {
 }
 
 module "rest_api_gateway" {
-    source = "./demo-terraform-vnt/modules.tf/rest_api_gateway"
+    source = "./modules/rest_api_gateway"
     name_stage = "dev"
     api_method = ["GET", "DELETE", "POST", "PUT"]
     aws_lambda_function_invoke_arn = module.lambda.lambda_invoke_arn
