@@ -23,7 +23,7 @@ resource "aws_api_gateway_method" "student_method" {
 resource "aws_api_gateway_stage" "stage" {
   deployment_id = aws_api_gateway_deployment.deployment.id
   rest_api_id   = aws_api_gateway_rest_api.students.id
-  stage_name    = var.example
+  stage_name    = var.name_stage
 }
 //fix lại
 resource "aws_api_gateway_integration" "integration" {
@@ -34,9 +34,7 @@ resource "aws_api_gateway_integration" "integration" {
   type                    = "AWS_PROXY"
   http_method             = aws_api_gateway_method.student_method[count.index].http_method
   integration_http_method = "POST"
-  //http_method is the method to use when calling the API Gateway endpoint
-  //integration_http_method is the method used by API Gateway to call the backend, i.e. Lambda in this case (it should always be POST for Lambda)
-}
+}   
 
 resource "aws_api_gateway_method_response" "response_200" {
   count = length(var.endpoint_path)
