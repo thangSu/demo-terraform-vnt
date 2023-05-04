@@ -15,3 +15,25 @@ terraform {
         }
     }
 }
+
+
+
+module "lambda" {
+    source       = "./modules/lambda"
+    dynamodb_arn = module.dynamodb.dynamodb_arn
+    depends_on = [
+    module.dynamodb
+    ]
+    source_file = [
+        "lambda_codes/dynamodb_get.py",
+        "lambda_codes/dynamodb_delete.py",
+        "lambda_codes/dynamodb_insert.py",
+        "lambda_codes/dynamodb_modify.py"
+    ]
+    output_path = [
+        "lambda_codes/zip/dynamodb_get.zip",
+        "lambda_codes/zip/dynamodb_delete.zip",
+        "lambda_codes/zip/dynamodb_insert.zip",
+        "lambda_codes/zip/dynamodb_modify.zip",
+    ]
+}
