@@ -45,4 +45,14 @@ module "rest_api_gateway" {
     aws_lambda_function_invoke_arn = module.lambda.lambda_invoke_arn
     aws_lambda_function_name = module.lambda.lambda_name[*]
     name_api = "student_api"
+    lambda_name = module.lambda.lambda_name
+    depends_on = [
+        module.lambda    
+    ]
+}
+
+module "dynamodb" {
+    source = "./modules/dynamodb"
+    read_capacity = 5
+    write_capacity = 5
 }
