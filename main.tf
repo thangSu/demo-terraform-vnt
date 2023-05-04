@@ -20,10 +20,10 @@ terraform {
 
 module "lambda" {
     source       = "./modules/lambda"
-    dynamodb_arn = module.dynamodb.dynamodb_arn
-    depends_on = [
-    module.dynamodb
-    ]
+    #dynamodb_arn = module.dynamodb.dynamodb_arn
+    # depends_on = [
+    # module.dynamodb
+    # ]
     source_file = [
         "lambda_codes/dynamodb_get.py",
         "lambda_codes/dynamodb_delete.py",
